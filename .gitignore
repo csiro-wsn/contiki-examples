@@ -11,6 +11,8 @@
 *.d
 *.map
 *.ucmotebase
+symbols.c
+symbols.h
 
 # Precompiled Headers
 *.gch
