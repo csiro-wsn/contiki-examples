@@ -3,6 +3,14 @@
 *.ko
 *.obj
 *.elf
+*.u
+*.*~
+*.srf06-cc26xx
+*.native
+*.csc
+*.d
+*.map
+*.ucmotebase
 
 # Precompiled Headers
 *.gch
@@ -27,6 +35,7 @@
 *.i*86
 *.x86_64
 *.hex
+*.bin
 
 # Debug files
 *.dSYM/
