@@ -2,6 +2,7 @@
 sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded
 sudo apt-get update
 sudo apt-get install gcc-arm-none-eabi	#Install ARM GCC EABI compiler
+sudo apt-get install libnewlib-arm-none-eabi	#Install ARM new library
 sudo apt-get install ckermit		#Install Serial Terminal
 sudo apt-get install libglib2.0 autoconf libtool libsdl-console libsdl-console-dev zlib1g-dev flex bison #dependencies for QEMU
 sudo apt-get install gitg		#Git management
