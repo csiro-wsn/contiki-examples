@@ -12,3 +12,5 @@ git clone https://github.com/contiki-os/contiki.git ~/contiki-git --recursive	#A
 cd ~/contiki-git
 git submodule sync && git submodule update --init
 
+#Adding environment variables
+sudo echo source ~/contiki-examples/tools/tools_env.sh >> ~/.bashrc
