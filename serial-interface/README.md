@@ -1,6 +1,6 @@
-Hello-world
+Serial-Interface
 ===========
 
-This adds the hello-world process in hello-world.c to the platform build, which
-prints "Hello-world" to stdout on startup and toggles the SensorTag's Red LED, every second.
+This adds the serial-interface process in serial-interface.c to the platform build, which
+will receive and serial input, when ctrl-enter is pressed and turn on the buzzer briefly.
 
