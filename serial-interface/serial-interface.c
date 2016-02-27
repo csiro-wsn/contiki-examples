@@ -52,13 +52,19 @@ PROCESS_THREAD(test_serial, ev, data) {
 
 	PROCESS_BEGIN();
 
-	cc26xx_uart_set_input(serial_line_input_byte);
+	cc26xx_uart_set_input(serial_line_input_byte);	//Initalise UART in serial driver
 	
    	while(1) {
 
      	PROCESS_YIELD();	//Let other threads run
 
-		//Check if serial input has occured     	
+		//Check if serial input has occured
+     	
+		//******************************************
+		//NOTE: MUST HOLD CTRL and then press ENTER 
+		//at the end of typing for the serial driver 
+		//to work.
+		//******************************************
 		if(ev == serial_line_event_message) {
        		printf("received line: %s\n", (char *)data);
 			buzzer_start(1000);
