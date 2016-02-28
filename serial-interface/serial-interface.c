@@ -41,7 +41,6 @@
 #include "buzzer.h"
 #include <stdio.h> /* For printf() */
 #include "dev/cc26xx-uart.h"
-#include "lib/cc26xxware/driverlib/uart.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(test_serial, "Serial line test process");
@@ -58,15 +57,16 @@ PROCESS_THREAD(test_serial, ev, data) {
 
      	PROCESS_YIELD();	//Let other threads run
 
-		//Check if serial input has occured
+		//Wait for event triggered by serial input
      	
 		//******************************************
 		//NOTE: MUST HOLD CTRL and then press ENTER 
 		//at the end of typing for the serial driver 
-		//to work.
+		//to work. Serial driver expects 0x0A as
+		//last character, to tigger the event.
 		//******************************************
 		if(ev == serial_line_event_message) {
-       		printf("received line: %s\n", (char *)data);
+       		printf("received line: %s\n\r", (char *)data);
 			buzzer_start(1000);
      	}
 	
