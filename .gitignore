@@ -41,3 +41,4 @@ symbols.h
 
 # Debug files
 *.dSYM/
+/tools/sensortag.uniflashsession
