@@ -33,7 +33,7 @@ PROCESS_THREAD(button_input_process, ev, data) {
             
             //Check if left push button event has occured
       		if(data == &button_left_sensor) {
-        		printf("Left: Pin %d, press duration %d clock ticks\n", (&button_left_sensor)->value(BUTTON_SENSOR_VALUE_STATE), (&button_left_sensor)->value(BUTTON_SENSOR_VALUE_DURATION));
+        		printf("Left: Pin %d, press duration %d clock ticks\n", button_left_sensor.value(BUTTON_SENSOR_VALUE_STATE), button_left_sensor.value(BUTTON_SENSOR_VALUE_DURATION));
                 
                 leds_toggle(LEDS_GREEN);    //Toggle LED
 			}
