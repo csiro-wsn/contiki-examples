@@ -31,9 +31,7 @@ def read_loop():
 # ============= main application starts here ==================
 
 # init serial port
-s = serial.Serial(port = '/dev/ttyUSB0', baudrate = 115200) # Zigduino
-#s = serial.Serial(port = '/dev/ttyACM0', baudrate = 115200) # UCBase
-#s.open()
+s = serial.Serial(port = '/dev/ttyACM0', baudrate = 115200) #SensorTag
 
 
 # start read_loop in a separate thread
