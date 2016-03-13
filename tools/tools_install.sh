@@ -16,3 +16,13 @@ git submodule sync && git submodule update --init
 
 #Adding environment variables
 sudo echo source ~/contiki-examples/tools/tools_env.sh >> ~/.bashrc
+
+#python tools
+sudo apt-get install python-pip
+sudo apt-get install python-wxgtk3.0
+sudo pip install pyserial
+sudo pip install readchar
+
+#network tools
+sudp apt-get install netcat6
+
