@@ -20,10 +20,12 @@ sudo echo source ~/contiki-examples/tools/tools_env.sh >> ~/.bashrc
 
 #python tools
 sudo apt-get install -y python-pip
-sudo apt-get install -y python-wxgtk3.0
+sudo apt-get install -y python-wxgtk2.8 python-wxgtk3.0  
 sudo pip install  pyserial
 sudo pip install  readchar
 
 #network tools
 sudo apt-get install -y netcat6
 
+
+sudo apt-get autoremove -y
