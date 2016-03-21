@@ -54,7 +54,7 @@ tcpip_handler(void)
   if(uip_newdata()) {
     str = uip_appdata;
     str[uip_datalen()] = '\0';
-    printf("Response from the server: '%s'\n", str);
+    printf("Response from the server: '%s' RSSI: %d\n\r", str, (signed short)packetbuf_attr(PACKETBUF_ATTR_RSSI));
   }
 }
 /*---------------------------------------------------------------------------*/
@@ -67,7 +67,7 @@ timeout_handler(void)
   printf("Client sending to: ");
   PRINT6ADDR(&client_conn->ripaddr);
   sprintf(buf, "Hello %d from the client", ++seq_id);
-  printf(" (msg: %s)\n", buf);
+  printf(" (msg: %s)\n\r", buf);
 #if SEND_TOO_LARGE_PACKET_TO_TEST_FRAGMENTATION
   uip_udp_packet_send(client_conn, buf, UIP_APPDATA_SIZE);
 #else /* SEND_TOO_LARGE_PACKET_TO_TEST_FRAGMENTATION */
@@ -87,7 +87,7 @@ print_local_addresses(void)
     if(uip_ds6_if.addr_list[i].isused &&
        (state == ADDR_TENTATIVE || state == ADDR_PREFERRED)) {
       PRINT6ADDR(&uip_ds6_if.addr_list[i].ipaddr);
-      PRINTF("\n");
+      PRINTF("\n\r");
     }
   }
 }
@@ -126,15 +126,15 @@ set_connection_address(uip_ipaddr_t *ipaddr)
     uip_ipaddr_t *resolved_addr = NULL;
     status = resolv_lookup(QUOTEME(UDP_CONNECTION_ADDR),&resolved_addr);
     if(status == RESOLV_STATUS_UNCACHED || status == RESOLV_STATUS_EXPIRED) {
-      PRINTF("Attempting to look up %s\n",QUOTEME(UDP_CONNECTION_ADDR));
+      PRINTF("Attempting to look up %s\n\r",QUOTEME(UDP_CONNECTION_ADDR));
       resolv_query(QUOTEME(UDP_CONNECTION_ADDR));
       status = RESOLV_STATUS_RESOLVING;
     } else if(status == RESOLV_STATUS_CACHED && resolved_addr != NULL) {
-      PRINTF("Lookup of \"%s\" succeded!\n",QUOTEME(UDP_CONNECTION_ADDR));
+      PRINTF("Lookup of \"%s\" succeded!\n\r",QUOTEME(UDP_CONNECTION_ADDR));
     } else if(status == RESOLV_STATUS_RESOLVING) {
-      PRINTF("Still looking up \"%s\"...\n",QUOTEME(UDP_CONNECTION_ADDR));
+      PRINTF("Still looking up \"%s\"...\n\r",QUOTEME(UDP_CONNECTION_ADDR));
     } else {
-      PRINTF("Lookup of \"%s\" failed. status = %d\n",QUOTEME(UDP_CONNECTION_ADDR),status);
+      PRINTF("Lookup of \"%s\" failed. status = %d\n\r",QUOTEME(UDP_CONNECTION_ADDR),status);
     }
     if(resolved_addr)
       uip_ipaddr_copy(ipaddr, resolved_addr);
@@ -151,7 +151,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
   uip_ipaddr_t ipaddr;
 
   PROCESS_BEGIN();
-  PRINTF("UDP client process started\n");
+  PRINTF("UDP client process started\n\r");
 
 #if UIP_CONF_ROUTER
   set_global_address();
@@ -166,7 +166,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
     if(status == RESOLV_STATUS_RESOLVING) {
       PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
     } else if(status != RESOLV_STATUS_CACHED) {
-      PRINTF("Can't get connection address.\n");
+      PRINTF("Can't get connection address.\n\r");
       PROCESS_YIELD();
     }
   }
@@ -177,7 +177,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
 
   PRINTF("Created a connection with the server ");
   PRINT6ADDR(&client_conn->ripaddr);
-  PRINTF(" local/remote port %u/%u\n",
+  PRINTF(" local/remote port %u/%u\n\r",
 	UIP_HTONS(client_conn->lport), UIP_HTONS(client_conn->rport));
 
   etimer_set(&et, SEND_INTERVAL);

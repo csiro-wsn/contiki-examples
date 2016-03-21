@@ -53,14 +53,14 @@ tcpip_handler(void)
 
   if(uip_newdata()) {
     ((char *)uip_appdata)[uip_datalen()] = 0;
-    PRINTF("Server received: '%s' from ", (char *)uip_appdata);
+    PRINTF("Server received: '%s' (RSSI: %d) from ", (char *)uip_appdata, (signed short)packetbuf_attr(PACKETBUF_ATTR_RSSI));
     PRINT6ADDR(&UIP_IP_BUF->srcipaddr);
     PRINTF("\n");
 
     uip_ipaddr_copy(&server_conn->ripaddr, &UIP_IP_BUF->srcipaddr);
     PRINTF("Responding with message: ");
     sprintf(buf, "Hello from the server! (%d)", ++seq_id);
-    PRINTF("%s\n", buf);
+    PRINTF("%s\n\r", buf);
 
     uip_udp_packet_send(server_conn, buf, strlen(buf));
     /* Restore server connection to allow data from any node */
@@ -80,7 +80,7 @@ print_local_addresses(void)
     if(uip_ds6_if.addr_list[i].isused &&
        (state == ADDR_TENTATIVE || state == ADDR_PREFERRED)) {
       PRINT6ADDR(&uip_ds6_if.addr_list[i].ipaddr);
-      PRINTF("\n");
+      PRINTF("\n\r");
     }
   }
 }
@@ -92,7 +92,7 @@ PROCESS_THREAD(udp_server_process, ev, data)
 #endif /* UIP_CONF_ROUTER */
 
   PROCESS_BEGIN();
-  PRINTF("UDP server started\n");
+  PRINTF("UDP server started\n\r");
 
 #if RESOLV_CONF_SUPPORTS_MDNS
   resolv_set_hostname("contiki-udp-server");
