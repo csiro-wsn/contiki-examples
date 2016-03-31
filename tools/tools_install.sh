@@ -7,6 +7,7 @@ sudo apt-get install srecord 					#Install srec cat
 sudo apt-get install ckermit		#Install Serial Terminal
 sudo apt-get install libglib2.0 autoconf libtool libsdl-console libsdl-console-dev zlib1g-dev flex bison #dependencies for QEMU
 sudo apt-get install gitg		#Git management
+sudo apt-get install libncurses5-dev
 sudo apt-get remove modemmanager brltty	#Remove serial terminal interference
 sudo adduser $USER dialout		#Add user permissions for dialout
 git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt
