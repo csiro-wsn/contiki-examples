@@ -14,12 +14,13 @@ UDP_REPLY_PORT = 7005 # node listens for reply packets on port 7005
 
 isRunning = True
 
+sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM, 0)
+sock.bind(('', 7005))
+
 def udpListenThread():
 
   # listen on UDP socket port UDP_TIMESYNC_PORT
-  recvSocket = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
-  recvSocket.bind(("fec0::100", UDP_REPLY_PORT))
-  recvSocket.settimeout(0.5)
+  
 
   while isRunning:
     
@@ -39,7 +40,7 @@ def udpSendThread():
     timestamp = int(time.time())
     print "Sending timesync packet with UTC[s]:", timestamp, "Localtime:", time.strftime("%Y-%m-%d %H:%M:%S")
 
-    # send UDP packet to nodes
+    # send UDP packet to nodes - Replace addresses with your sensortag routing address (e.g. aaaa::<sensortag ID>)
     sock.sendto(struct.pack("I", timestamp), ("fec0::2", UDP_TIMESYNC_PORT))
     sock.sendto(struct.pack("I", timestamp), ("fec0::3", UDP_TIMESYNC_PORT))
     
