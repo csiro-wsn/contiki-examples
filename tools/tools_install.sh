@@ -25,5 +25,5 @@ sudo pip install pyserial
 sudo pip install readchar
 
 #network tools
-sudp apt-get install netcat6
+sudo apt-get install netcat6
 
